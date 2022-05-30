@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+ copy/paste from site :
+   =======================
+<form  id="form" enctype="multipart/form-data">
+    <div class="input-group">
+        <label for="files">Select Files</label>
+        <input type="file" id="file" multiple>
+    </div>
+    <button class="submit-btn" type="submit">Upload</button>
+</form>
+
+<script>
+    const form = document.getElementById('form');
+    const inputFile = document.getElementById('file');
+
+    const formData = new FormData();
+
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        for(const file of inputFile.files){
+            formData.append('files',file);
+        }
+        fetch(`https://reqres.in/api/users`,{
+            method:"post",
+            body:formData
+        }).catch(err=>{
+            console.log(err);
+        })
+    })
+</script>
+
+====================================================================== 
+<form  id="mainForm" enctype="multipart/form-data">
+    <label for="file">Upload Files </label>
+    <input type="file" id="myFiles" multiple>
+
+    <input type="submit" class="submit-btn" value="Upload Files">
+</form>
+
+<script>
+    const mainForm = document.getElementById('mainForm');
+    const myFiles = document.getElementById('myFiles');
+    const mainFormData = new FormData();
+
+    mainForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        for(file of myFiles.files){
+            mainFormData.append('files',file);
+        }
+        fetch(`https://reqres.in/api/users`,{
+            method:'post',
+            body:mainFormData
+        }).catch(err=>{
+            console.log(err);
+        })
+    })
+</script>
+
+======================================================================= 
+
+//VET IMPORTANT ,*** IN FILE <INPUT TYPE="FILE" > * DON'T USE "name" attribute ONLY use "id"////
+<form id="form2" enctype="multipart/form-data" class="thirdForm">
+    <div class="userinfo">
+        <label for="name">USER NAME: </label>
+        <input type="text" name="userName"><br>
+        <label for="password">PASSWORD :</label>
+        <input type="password" name="password"><br>
+        <label for="file">UPLOAD FILE/S </label>
+        <input type="file"  id="allfiles" multiple><br><br>
+        <input type="submit" value="POST FORM2">
+    </div>
+</form>
+
+<script>
+    const form2 = document.getElementById('form2');
+    //const allfiles = document.getElementById('allfiles');
+
+   // const formData2 = new FormData(document.getElementById('form2'));
+    form2.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        const formData2 = new FormData(document.getElementById('form2'));
+        for(const file of allfiles.files){
+            formData2.append('files',file);
+        }
+        await fetch(`https://reqres.in/api/users`,{
+            method:'post',
+            body:formData2
+        }).catch(err=>{
+            console.log(err);
+        })
+    })
+</script>
+
+</body>
+</html>
+
+
